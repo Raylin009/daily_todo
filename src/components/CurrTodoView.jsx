@@ -6,15 +6,25 @@ import OptBtn from './OptBtn.jsx';
 class currTodoView extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      list:[],
+    };
+
+    this.handleAddToDo = this.handleAddToDo.bind(this)
+  }
+  
+  handleAddToDo(value) {
+    this.setState({
+      list: [...this.state.list, value],
+    });
   }
 
   render() {
     return (
-      <div style={{ border: 'solid', margin: '5px', order: 2 ,flexGrow: 9 }}>
+      <div style={{ border: 'solid', margin: '5px', order: 2, flexGrow: 9 }}>
         <h2>CurrTodoView.jsx</h2>
         <TDList />
-        <TDinput />
+        <TDinput addTodo={this.handleAddToDo} />
         <OptBtn />
       </div>
     );
