@@ -11,8 +11,8 @@ class currTodoView extends React.Component {
 
   render() {
     return (
-      <div>
-        <h2>Current Todo View</h2>
+      <div style={{ border: 'solid', margin: '5px', order: 2 ,flexGrow: 9 }}>
+        <h2>CurrTodoView.jsx</h2>
         <TDList />
         <TDinput />
         <OptBtn />

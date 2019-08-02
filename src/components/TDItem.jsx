@@ -8,15 +8,12 @@ class TDitem extends React.Component {
 
   render() {
     return (
-      <div>
-        <div>
-          <h4>To Do 1</h4>
+      <div style={{ marginBlockEnd: '5px', marginRight: 'inherit', borderBottom: 'solid', display: 'flex', flexDirection: 'row' }}>
+        <div style={{border: 'solid', borderRadius: '100%', width: '18px'}}>
+          <br></br>
         </div>
         <div>
-          <h4>To Do 2</h4>
-        </div>
-        <div>
-          <h4>To Do 3</h4>
+          Content
         </div>
       </div>
     );

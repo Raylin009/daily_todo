@@ -1,8 +1,8 @@
 import React from 'react';
 
 const PTDItem = props => (
-  <div>
-    <h3>Past ToDo Item</h3>
+  <div style={{ border: 'solid', margin: '5px' }}>
+    <h3>PTDItem.jsx</h3>
   </div>
 );
 

@@ -12,8 +12,7 @@ class App extends React.Component {
 
   render() {
     return (
-      <div>
-        <h1>App Component Established</h1>
+      <div style={{ border: 'solid', margin: '5px', display: 'flex', alignContent: 'stretch', height: '1000px'}}>
         <CurrTodoView />
         <PastTodos />
       </div>

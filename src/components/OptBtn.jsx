@@ -8,9 +8,9 @@ class OptBtn extends React.Component {
 
   render() {
     return (
-      <div>
-        <a>Print</a>
-        <a>Send</a>
+      <div style={{ border: 'solid', margin: '5px', position: 'fixed', right: '25px', bottom: '1px', display: 'flex', flexDirection: 'column'}}>
+        <button>Print</button>
+        <button>Send</button>
       </div>
     );
   }
