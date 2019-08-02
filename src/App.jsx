@@ -1,5 +1,6 @@
 import React from 'react';
 import CurrTodoView from './components/CurrTodoView.jsx';
+import PastTodos from './components/PastTodos.jsx';
 
 class App extends React.Component {
   constructor(props) {
@@ -14,6 +15,7 @@ class App extends React.Component {
       <div>
         <h1>App Component Established</h1>
         <CurrTodoView />
+        <PastTodos />
       </div>
     );
   }
