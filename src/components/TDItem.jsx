@@ -9,7 +9,7 @@ class TDitem extends React.Component {
   render() {
     return (
       <div style={{ marginBlockEnd: '5px', marginRight: 'inherit', borderBottom: 'solid', display: 'flex', flexDirection: 'row' }}>
-        <div style={{border: 'solid', borderRadius: '100%', width: '18px'}}>
+        <div style={{ border: 'solid', borderRadius: '100%', width: '18px' }}>
           <br></br>
         </div>
         <div>
