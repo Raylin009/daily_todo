@@ -1,10 +1,21 @@
 import React from 'react';
 
+const completeStatus = { border: 'solid', borderRadius: '100%', width: '18px' };
+
+const renderCompStatus = (status) => {
+  const done = {
+    border: 'solid', borderRadius: '100%', width: '18px', background: 'black'
+  };
+  const notDone = { border: 'solid', borderRadius: '100%', width: '18px' };
+
+  return status ? done : notDone;
+};
+
 class TDitem extends React.Component {
   constructor(props) {
     super(props);
     this.state = {};
-    this.renderComplete = this.renderComplete.bind(this);
+    this.toggleComplete = this.toggleComplete.bind(this);
     this.exacuteRmFunc = this.exacuteRmFunc.bind(this);
   }
 
@@ -14,8 +25,7 @@ class TDitem extends React.Component {
     rmFunc(id);
   }
 
-  renderComplete(e) {
-    // console.log(e.target.id)
+  toggleComplete(e) {
     const { id } = e.target;
     const { compFunc } = this.props;
     compFunc(id);
@@ -27,8 +37,7 @@ class TDitem extends React.Component {
 
     return (
       <div style={{ marginBlockEnd: '5px', marginRight: 'inherit', borderBottom: 'solid', display: 'flex', flexDirection: 'row', height: 24 }}>
-        <div id={item.id} onClick={this.renderComplete} style={{ border: 'solid', borderRadius: '100%', width: '18px' }}>
-        </div>
+        <div id={item.id} onClick={this.toggleComplete} style={ renderCompStatus(item.complete) } ></div>
         <div style={{ margin: '5px' }}>
           { item.name }
         </div>

@@ -37,15 +37,22 @@ class currTodoView extends React.Component {
   }
 
   handleRemove(id) {
-    const newState = this.state.list.filter( ele => ele.id !== parseInt(id))
+    const { list } = this.state;
     this.setState({
-      list: [...newState],
+      list: [...list.filter(ele => ele.id !== parseInt(id))],
     });
   }
 
-  handleComplete(event) {
-    console.log('ah')
-    // const newState = this.state.list.filter( ele => (ele.id !== parseInt(id) ? ele.toggle() : ele.toggle()));
+  handleComplete(id) {
+    const newState = this.state.list.map(ele => {
+      if(ele.id === parseInt(id)){
+        ele.toggle()
+      };
+      return ele
+    })
+    this.setState({
+      list: [...newState],
+    });
   }
 
   render() {
