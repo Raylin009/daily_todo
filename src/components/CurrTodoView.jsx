@@ -3,28 +3,57 @@ import TDList from './TDList.jsx';
 import TDinput from './TDinput.jsx';
 import OptBtn from './OptBtn.jsx';
 
+class ToDoObj {
+  constructor(name, id) {
+    this.id = id;
+    this.name = name;
+    this.complete = false;
+    this.priority = 'LOW';
+  }
+
+  toggle() {
+    this.complete = !this.complete;
+  }
+}
+
 class currTodoView extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      list:[],
+      list: [],
     };
 
-    this.handleAddToDo = this.handleAddToDo.bind(this)
+    this.handleAddToDo = this.handleAddToDo.bind(this);
+    this.handleRemove = this.handleRemove.bind(this);
+    this.handleComplete = this.handleComplete.bind(this);
   }
-  
-  handleAddToDo(value) {
+
+  handleAddToDo(value, id) {
+    const todo = new ToDoObj(value, id);
+
     this.setState({
-      list: [...this.state.list, value],
+      list: [...this.state.list, todo],
     });
+  }
+
+  handleRemove(id) {
+    const newState = this.state.list.filter( ele => ele.id !== parseInt(id))
+    this.setState({
+      list: [...newState],
+    });
+  }
+
+  handleComplete(event) {
+    console.log('ah')
+    // const newState = this.state.list.filter( ele => (ele.id !== parseInt(id) ? ele.toggle() : ele.toggle()));
   }
 
   render() {
     return (
       <div style={{ border: 'solid', margin: '5px', order: 2, flexGrow: 9 }}>
         <h2>CurrTodoView.jsx</h2>
-        <TDList />
-        <TDinput addTodo={this.handleAddToDo} />
+        <TDList list={this.state.list} rmFunc={this.handleRemove} compFunc={this.handleComplete} />
+        <TDinput add={this.handleAddToDo} />
         <OptBtn />
       </div>
     );

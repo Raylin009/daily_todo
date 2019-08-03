@@ -12,19 +12,20 @@ class TDinput extends React.Component {
 
   handleChange(e) {
     this.setState({ val: e.target.value });
-  };
+  }
 
-  handleSubmit(v) {
-    const { addTodo } = this.props;
+  handleSubmit(e) {
+    const { add } = this.props;
+    // console.log(e.timeStamp)
+    // console.log(Date.now())
     event.preventDefault();
-    addTodo(v);
+    add(this.state.val, Date.now());
   }
 
   render() {
     const { val } = this.state;
 
     return (
-
       <div style={{ border: 'solid', margin: '5px' }}>
         <h3>TDinput.jsx</h3>
         <form>
@@ -35,11 +36,5 @@ class TDinput extends React.Component {
     );
   }
 }
-
-// const TDinput = props => (
-//   <div style={{ border: 'solid', margin: '5px' }}>
-//     <h3>TDinput.jsx</h3>
-//   </div>
-// );
 
 export default TDinput;
