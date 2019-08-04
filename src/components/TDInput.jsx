@@ -8,18 +8,28 @@ class TDinput extends React.Component {
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.resetInput = this.resetInput.bind(this);
   }
 
   handleChange(e) {
     this.setState({ val: e.target.value });
   }
 
+  resetInput() {
+    this.setState({
+      val: '',
+    });
+  }
+
   handleSubmit(e) {
     const { add } = this.props;
-    // console.log(e.timeStamp)
-    // console.log(Date.now())
+    const { val } = this.state;
+
     event.preventDefault();
-    add(this.state.val, Date.now());
+    if (val.length !== 0) {
+      add(val, Date.now());
+      this.resetInput();
+    }
   }
 
   render() {
