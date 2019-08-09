@@ -1,7 +1,8 @@
+/* eslint-disable import/extensions */
 import React from 'react';
+import Axios from 'axios';
 import CurrTodoView from './components/CurrTodoView.jsx';
 import PastTodos from './components/PastTodos.jsx';
-import Axios from 'axios';
 
 class App extends React.Component {
   constructor(props) {

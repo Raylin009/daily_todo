@@ -19,7 +19,14 @@ const pg = require('../db/postgres.js');
 app.use(bodyParser.json());
 app.use(express.static(distPath));
 
-app.get('/lists', (req, res) => pg.getList(req, res, db));
+app.get('/lists/all', (req, res) => pg.getAllList(req, res, db));
+app.get('/l/:id', (req, res) => pg.getListById(req, res, db));
+
+app.get('/items/')
+
+app.get('/testNewFunc', (req, res) => pg.getListById(req, res, db));
+
+app.get('/list:id', (req, res) => (console.log(req.params)));
 app.post('/list:id', (req, res) => pg.addList(req, res, db));
 
 app.listen(port, () => console.log(`listening on port: ${port}`));
