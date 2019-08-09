@@ -1,6 +1,7 @@
 import React from 'react';
 import CurrTodoView from './components/CurrTodoView.jsx';
 import PastTodos from './components/PastTodos.jsx';
+import Axios from 'axios';
 
 class App extends React.Component {
   constructor(props) {
@@ -8,7 +9,26 @@ class App extends React.Component {
     this.state = {
       // pastTodos:[],
     };
+
+    this.getLists = this.getLists.bind(this);
+    // this.getItems = this.getItems.bind(this);
   }
+
+  componentDidMount() {
+    //ask db if today's list exist?
+      //if so get all records with that id
+      //else create new list id and render empty todo
+      
+    console.log('mounted');
+    this.getLists();
+  }
+
+  getLists() {
+    const limit = 20;
+    Axios.get(`/lists/${limit}`)
+      .then( data => (console.log(data)))
+      .catch( err => (console.error(`App.jsx line 26: ${err}`)))
+  };
 
   render() {
     return (
