@@ -19,10 +19,27 @@ const pg = require('../db/postgres.js');
 app.use(bodyParser.json());
 app.use(express.static(distPath));
 
+// get all list
 app.get('/lists/all', (req, res) => pg.getAllList(req, res, db));
+
+// get list by id
 app.get('/l/:id', (req, res) => pg.getListById(req, res, db));
 
-app.get('/items/')
+// get today's list if exist
+
+// add list
+
+// delete List
+
+// ---> change list name
+
+// get items by list id
+
+// Add item
+
+// change item
+
+// delete item
 
 app.get('/testNewFunc', (req, res) => pg.getListById(req, res, db));
 
