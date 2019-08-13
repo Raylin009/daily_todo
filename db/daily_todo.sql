@@ -7,14 +7,20 @@ CREATE database dailytodo;
 
 CREATE TABLE lists (
   id INT NOT NULL PRIMARY KEY,
-  name VARCHAR(150)
+  name VARCHAR(150),
+  date TIMESTAMPTZ NOT NULL
+       DEFAULT CURRENT_TIMESTAMP
 );
 
 CREATE TABLE items (
   id INT NOT NULL PRIMARY KEY,
   description VARCHAR(500), 
-  status BOOLEAN,
+  complete BOOLEAN,
   listid INT,
-  orderinlist INT
+  orderinlist INT DEFAULT 0,
+  create_at TIMESTAMPTZ NOT NULL
+            DEFAULT CURRENT_TIMESTAMP
 );
+
+
 

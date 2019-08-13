@@ -23,9 +23,10 @@ app.use(express.static(distPath));
 app.get('/lists/all', (req, res) => pg.getAllList(req, res, db));
 
 // get list by id
-app.get('/l/:id', (req, res) => pg.getListById(req, res, db));
+app.get('/l/:id', (req, res) => pg.getItemsByListId(req, res, db));
 
-// get today's list if exist
+// get today's list if exist aka initDailyList
+app.get('/init/list', (req, res) => pg.getItemsByListId(req, res, db));
 
 // add list
 
