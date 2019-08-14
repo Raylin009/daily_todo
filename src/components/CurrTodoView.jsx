@@ -4,11 +4,11 @@ import TDinput from './TDinput.jsx';
 import OptBtn from './OptBtn.jsx';
 
 class ToDoObj {
-  constructor(name, id) {
+  constructor(description, id) {
     this.id = id;
-    this.name = name;
+    this.description = description;
     this.complete = false;
-    this.priority = 'LOW';
+    this.orderinlist = 'LOW';
   }
 
   toggle() {
@@ -44,12 +44,14 @@ class currTodoView extends React.Component {
   }
 
   handleComplete(id) {
-    const newState = this.state.list.map(ele => {
-      if(ele.id === parseInt(id)){
-        ele.toggle()
-      };
-      return ele
-    })
+    const newState = this.state.list.map(
+      (ele) => {
+        if (ele.id === parseInt(id)) {
+          ele.toggle();
+        }
+        return ele;
+      },
+    );
     this.setState({
       list: [...newState],
     });
@@ -59,9 +61,10 @@ class currTodoView extends React.Component {
     return (
       <div style={{ border: 'solid', margin: '5px', order: 2, flexGrow: 9 }}>
         <h2>CurrTodoView.jsx</h2>
-        <TDList list={this.state.list} rmFunc={this.handleRemove} compFunc={this.handleComplete} />
+        <TDList list={this.props.todoItems || []} rmFunc={this.handleRemove} compFunc={this.handleComplete} />
         <TDinput add={this.handleAddToDo} />
         <OptBtn />
+        {console.log(this.props.todoItems)}
       </div>
     );
   }

@@ -42,17 +42,17 @@ class App extends React.Component {
     Axios.get(`/l/${id}`)
       .then(({ data }) => {
         this.setState({
-          heroTodoListItems: data
+          heroTodoListItems: data,
         })
       })
       .catch(err => console.log(`getItems failed: ${err}`));
   }
 
   render() {
-    const { lists, heroTodoItems } = this.state;
+    const { lists, heroTodoListItems } = this.state;
     return (
       <div style={{ border: 'solid', margin: '5px', display: 'flex', alignContent: 'stretch', height: '1000px'}}>
-        <CurrTodoView todoItems={heroTodoItems} />
+        <CurrTodoView todoItems={heroTodoListItems} />
         <PastTodos lists={lists} />
       </div>
     );

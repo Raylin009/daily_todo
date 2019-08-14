@@ -39,7 +39,7 @@ class TDitem extends React.Component {
       <div style={{ marginBlockEnd: '5px', marginRight: 'inherit', borderBottom: 'solid', display: 'flex', flexDirection: 'row', height: 24 }}>
         <div id={item.id} onClick={this.toggleComplete} style={ renderCompStatus(item.complete) } ></div>
         <div style={{ margin: '5px' }}>
-          { item.name }
+          { item.description }
         </div>
         <div id={item.id} onClick={this.exacuteRmFunc} style={{ border: 'solid' }}>
           Delete
