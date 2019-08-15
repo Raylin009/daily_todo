@@ -28,7 +28,7 @@ class TDitem extends React.Component {
   toggleComplete(e) {
     const { id } = e.target;
     const { compFunc } = this.props;
-    compFunc(id);
+    compFunc(id, this.props.item.complete);
   }
 
 

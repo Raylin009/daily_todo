@@ -34,37 +34,37 @@ class currTodoView extends React.Component {
     const { description, create_at } = inputObj;
     const { list } = this.state;
     const orderinlist = list.length + 1;
-    Axios.post('/addtask', { description, orderinlist, listid, create_at })
-      // .then(({ data }) => console.log(data))
+    Axios.post('/addtask', {
+      description, orderinlist, listid, create_at,
+    })
       .then(() => getItems())
       .catch(err => console.log(err));
   }
 
   handleRemove(id) {
     const { getItems } = this.props;
-    // const { list } = this.state;
-    // this.setState({
-    //   list: [...list.filter(ele => ele.id !== parseInt(id))],
-    // });
-
     Axios.delete(`/rm/${id}`)
-    .then(data => (console.log(data.data)))
-    .then(() => getItems())
-    .catch(err => console.log(err))
+      .then(data => (console.log(data.data)))
+      .then(() => getItems())
+      .catch(err => console.log(err));
   }
 
-  handleComplete(id) {
-    const newState = this.state.list.map(
-      (ele) => {
-        if (ele.id === parseInt(id)) {
-          ele.toggle();
-        }
-        return ele;
-      },
-    );
-    this.setState({
-      list: [...newState],
-    });
+  handleComplete(id, completeStatus) {
+    const { getItems } = this.props;
+    // const newState = this.state.list.map(
+    //   (ele) => {
+    //     if (ele.id === parseInt(id)) {
+    //       ele.toggle();
+    //     }
+    //     return ele;
+    //   },
+    // );
+    // this.setState({
+    //   list: [...newState],
+    // });
+    Axios.patch(`./complete/${id}`, { complete: !completeStatus })
+      .then(() => getItems())
+      .catch(err => console.log(err))
   }
 
   render() {

@@ -38,8 +38,8 @@ app.get('/init/list', (req, res) => pg.getItemsByListId(req, res, db));
 
 // Add item
 app.post('/addtask', (req, res) => pg.addItemToList(req, res, db));
-// change item
-
+// toggle complete
+app.patch('/complete/:id', (req, res) => pg.toggleComplete(req, res, db));
 // delete item
 app.delete('/rm/:id', (req, res) => pg.deleteTodoItem(req, res, db));
 

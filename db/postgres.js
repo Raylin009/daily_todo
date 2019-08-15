@@ -35,6 +35,12 @@ const deleteTodoItem = (req, res, db) => {
     .catch(err => console.log(err));
 };
 
+const toggleComplete = (req, res, db) => {
+  db('items').where('id', req.params.id).update(req.body)
+    .then(data => res.end())
+    .catch(err => console.log(err));
+};
+
 module.exports = {
   getAllList,
   addList,
@@ -42,4 +48,5 @@ module.exports = {
   getItemsByListId,
   addItemToList,
   deleteTodoItem,
+  toggleComplete,
 };
