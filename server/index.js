@@ -37,10 +37,11 @@ app.get('/init/list', (req, res) => pg.getItemsByListId(req, res, db));
 // get items by list id
 
 // Add item
-
+app.post('/addtask', (req, res) => pg.addItemToList(req, res, db));
 // change item
 
 // delete item
+app.delete('/rm/:id', (req, res) => pg.deleteTodoItem(req, res, db));
 
 app.get('/testNewFunc', (req, res) => pg.getListById(req, res, db));
 

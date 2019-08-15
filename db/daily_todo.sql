@@ -5,21 +5,26 @@ CREATE database dailytodo;
 
 \connect dailytodo;
 
+CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
+
 CREATE TABLE lists (
-  id INT NOT NULL PRIMARY KEY,
+  id uuid DEFAULT uuid_generate_v4 (),
   name VARCHAR(150),
   date TIMESTAMPTZ NOT NULL
-       DEFAULT CURRENT_TIMESTAMP
+       DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (id)
 );
 
 CREATE TABLE items (
-  id INT NOT NULL PRIMARY KEY,
+  id uuid DEFAULT uuid_generate_v4 (),
   description VARCHAR(500), 
-  complete BOOLEAN,
-  listid INT,
+  complete BOOLEAN NOT NULL 
+           DEFAULT FALSE,
+  listid uuid, 
   orderinlist INT DEFAULT 0,
   create_at TIMESTAMPTZ NOT NULL
-            DEFAULT CURRENT_TIMESTAMP
+            DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (id)
 );
 
 

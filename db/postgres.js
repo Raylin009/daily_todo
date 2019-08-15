@@ -1,6 +1,6 @@
 const getAllList = (req, res, db) => {
   // db.select('*').from('lists')
-  db.select().table('lists').orderBy('date', 'asc')
+  db.select().table('lists').orderBy('date', 'desc')
     .then(data => res.send(data))
     .catch(err => console.log(`getList method err: ${err}`));
 };
@@ -23,13 +23,23 @@ const addList = (req, res, db) => {
     .catch(err => console.log(`addList method err: ${err}`));
 };
 
-// const initDailyList = (req, res, db) => {
-  
-// }
+const addItemToList = (req, res, db) => {
+  db('items').insert(req.body)
+    .then(data => res.send(data))
+    .catch(err => console.log(err));
+};
+
+const deleteTodoItem = (req, res, db) => {
+  db('items').where('id', req.params.id).del()
+    .then(data => res.end())
+    .catch(err => console.log(err));
+};
 
 module.exports = {
   getAllList,
   addList,
   getListById,
   getItemsByListId,
+  addItemToList,
+  deleteTodoItem,
 };

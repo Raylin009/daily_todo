@@ -10,8 +10,9 @@ class App extends React.Component {
     super(props);
     this.state = {
       lists: [],
+      heroListID: null,
       heroList: {},
-      heroTodoItems: [],
+      heroTodoListItems: [],
     };
 
     this.getLists = this.getLists.bind(this);
@@ -28,31 +29,35 @@ class App extends React.Component {
         if (data.length) {
           this.setState({
             lists: data,
+            heroListID: data[0].id,
             heroList: data[0],
             heroTodoListItems: [],
           });
         }
-        return data[0].id;
       })
-      .then(listID => this.getItems(listID))
+      .then(() => this.getItems())
       .catch(err => console.log(`getLists failed ${err}`));
   }
 
-  getItems(id) {
-    Axios.get(`/l/${id}`)
-      .then(({ data }) => {
-        this.setState({
-          heroTodoListItems: data,
+  getItems() {
+    const { heroListID } = this.state;
+
+    if (heroListID !== null) {
+      Axios.get(`/l/${heroListID}`)
+        .then(({ data }) => {
+          this.setState({
+            heroTodoListItems: data,
+          });
         })
-      })
-      .catch(err => console.log(`getItems failed: ${err}`));
+        .catch(err => console.log(`getItems failed: ${err}`));
+    }
   }
 
   render() {
-    const { lists, heroTodoListItems } = this.state;
+    const { lists, heroTodoListItems, heroListID } = this.state;
     return (
       <div style={{ border: 'solid', margin: '5px', display: 'flex', alignContent: 'stretch', height: '1000px'}}>
-        <CurrTodoView todoItems={heroTodoListItems} />
+        <CurrTodoView getItems={this.getItems} listid={heroListID} todoItems={heroTodoListItems} getItems={this.getItems} />
         <PastTodos lists={lists} />
       </div>
     );
