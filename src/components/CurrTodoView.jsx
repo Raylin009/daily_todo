@@ -4,19 +4,6 @@ import TDList from './TDList.jsx';
 import TDinput from './TDinput.jsx';
 import OptBtn from './OptBtn.jsx';
 
-// class ToDoObj {
-//   constructor(description, id, order) {
-//     this.id = id;
-//     this.description = description;
-//     this.complete = false;
-//     this.orderinlist = 'LOW';
-//   }
-
-//   toggle() {
-//     this.complete = !this.complete;
-//   }
-// }
-
 class currTodoView extends React.Component {
   constructor(props) {
     super(props);
@@ -30,41 +17,29 @@ class currTodoView extends React.Component {
   }
 
   handleAddToDo(inputObj) {
-    const { listid, getItems } = this.props;
+    let { listid, getItems, todoItems } = this.props;
     const { description, create_at } = inputObj;
-    const { list } = this.state;
-    const orderinlist = list.length + 1;
+    const orderinlist = todoItems ? todoItems.length : 1 ;
+
     Axios.post('/addtask', {
       description, orderinlist, listid, create_at,
     })
-      .then(() => getItems())
+      .then(() => getItems(listid))
       .catch(err => console.log(err));
   }
 
   handleRemove(id) {
-    const { getItems } = this.props;
+    const { getItems, listid } = this.props;
     Axios.delete(`/rm/${id}`)
-      .then(data => (console.log(data.data)))
-      .then(() => getItems())
+      .then(() => getItems(listid))
       .catch(err => console.log(err));
   }
 
   handleComplete(id, completeStatus) {
-    const { getItems } = this.props;
-    // const newState = this.state.list.map(
-    //   (ele) => {
-    //     if (ele.id === parseInt(id)) {
-    //       ele.toggle();
-    //     }
-    //     return ele;
-    //   },
-    // );
-    // this.setState({
-    //   list: [...newState],
-    // });
+    const { getItems, listid } = this.props;
     Axios.patch(`./complete/${id}`, { complete: !completeStatus })
-      .then(() => getItems())
-      .catch(err => console.log(err))
+      .then(() => getItems(listid))
+      .catch(err => console.log(err));
   }
 
   render() {

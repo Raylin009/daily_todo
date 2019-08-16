@@ -34,7 +34,7 @@ class PTDItem extends React.Component {
       <div
         onMouseEnter={this.toggleDelete}
         onMouseLeave={this.toggleDelete}
-        onClick={() => (console.log(`getItemsByListId ${id}`))}
+        onClick={() => (this.props.listSelection(id))}
         key={id}
         style={{ border: 'solid', margin: '5px' }}
       >

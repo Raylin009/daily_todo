@@ -17,6 +17,7 @@ class App extends React.Component {
 
     this.getLists = this.getLists.bind(this);
     this.getItems = this.getItems.bind(this);
+    this.handleListSelection = this.handleListSelection.bind(this);
   }
 
   componentDidMount() {
@@ -34,16 +35,15 @@ class App extends React.Component {
             heroTodoListItems: [],
           });
         }
+        return data[0].id;
       })
-      .then(() => this.getItems())
+      .then(id => this.getItems(id))
       .catch(err => console.log(`getLists failed ${err}`));
   }
 
-  getItems() {
-    const { heroListID } = this.state;
-
-    if (heroListID !== null) {
-      Axios.get(`/l/${heroListID}`)
+  getItems(id) {
+    if (id !== null) {
+      Axios.get(`/l/${id}`)
         .then(({ data }) => {
           this.setState({
             heroTodoListItems: data,
@@ -53,12 +53,16 @@ class App extends React.Component {
     }
   }
 
+  handleListSelection(listID) {
+    this.setState({ heroListID: listID }, () => (this.getItems(listID)));
+  }
+
   render() {
     const { lists, heroTodoListItems, heroListID } = this.state;
     return (
       <div style={{ border: 'solid', margin: '5px', display: 'flex', alignContent: 'stretch', height: '1000px'}}>
         <CurrTodoView getItems={this.getItems} listid={heroListID} todoItems={heroTodoListItems} getItems={this.getItems} />
-        <PastTodos lists={lists} />
+        <PastTodos listSelection={this.handleListSelection} lists={lists} />
       </div>
     );
   }

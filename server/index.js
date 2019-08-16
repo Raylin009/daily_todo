@@ -43,9 +43,4 @@ app.patch('/complete/:id', (req, res) => pg.toggleComplete(req, res, db));
 // delete item
 app.delete('/rm/:id', (req, res) => pg.deleteTodoItem(req, res, db));
 
-app.get('/testNewFunc', (req, res) => pg.getListById(req, res, db));
-
-app.get('/list:id', (req, res) => (console.log(req.params)));
-app.post('/list:id', (req, res) => pg.addList(req, res, db));
-
 app.listen(port, () => console.log(`listening on port: ${port}`));

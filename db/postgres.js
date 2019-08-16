@@ -12,7 +12,10 @@ const getListById = (req, res, db) => {
 };
 
 const getItemsByListId = (req, res, db) => {
-  db.select().table('items').where({ listid: req.params.id })
+  db.select()
+    .table('items')
+    .where({ listid: req.params.id })
+    .orderBy('create_at', 'asc')
     .then(data => res.send(data))
     .catch(err => console.log(`getItemsByListId method err: ${err}`));
 };
