@@ -27,14 +27,14 @@ class PTDItem extends React.Component {
   }
 
   render() {
-    const { id, name } = this.props;
+    const { id, name, date } = this.props;
     const { hideDelete } = this.state;
 
     return (
       <div
         onMouseEnter={this.toggleDelete}
         onMouseLeave={this.toggleDelete}
-        onClick={() => (this.props.listSelection(id))}
+        onClick={() => (this.props.listSelection( id, name, date ))}
         key={id}
         style={{ border: 'solid', margin: '5px' }}
       >

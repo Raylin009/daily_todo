@@ -11,7 +11,6 @@ class App extends React.Component {
     this.state = {
       lists: [],
       heroListID: null,
-      heroList: {},
       heroTodoListItems: [],
     };
 
@@ -31,7 +30,8 @@ class App extends React.Component {
           this.setState({
             lists: data,
             heroListID: data[0].id,
-            heroList: data[0],
+            heroListName: data[0].name,
+            heroListDate: data[0].date,
             heroTodoListItems: [],
           });
         }
@@ -53,15 +53,25 @@ class App extends React.Component {
     }
   }
 
-  handleListSelection(listID) {
-    this.setState({ heroListID: listID }, () => (this.getItems(listID)));
+  handleListSelection(listID, listName, listDate) {
+    this.setState({
+      heroListID: listID,
+      heroListName: listName,
+      heroListDate: listDate,
+    }, () => (this.getItems(listID)));
   }
 
   render() {
-    const { lists, heroTodoListItems, heroListID } = this.state;
+    const { lists, heroTodoListItems, heroListID, heroListName, heroListDate } = this.state;
     return (
       <div style={{ border: 'solid', margin: '5px', display: 'flex', alignContent: 'stretch', height: '1000px'}}>
-        <CurrTodoView getItems={this.getItems} listid={heroListID} todoItems={heroTodoListItems} getItems={this.getItems} />
+        <CurrTodoView
+          getItems={this.getItems}
+          listid={heroListID}
+          listName={heroListName}
+          listDate={heroListDate}
+          todoItems={heroTodoListItems}
+        />
         <PastTodos listSelection={this.handleListSelection} lists={lists} />
       </div>
     );

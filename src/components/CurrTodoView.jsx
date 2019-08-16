@@ -19,7 +19,7 @@ class currTodoView extends React.Component {
   handleAddToDo(inputObj) {
     let { listid, getItems, todoItems } = this.props;
     const { description, create_at } = inputObj;
-    const orderinlist = todoItems ? todoItems.length : 1 ;
+    const orderinlist = todoItems ? todoItems.length : 1;
 
     Axios.post('/addtask', {
       description, orderinlist, listid, create_at,
@@ -43,15 +43,15 @@ class currTodoView extends React.Component {
   }
 
   render() {
-    const { todoItems } = this.props;
+    const { todoItems, listName, listDate } = this.props;
     return (
       <div style={{ border: 'solid', margin: '5px', order: 2, flexGrow: 9 }}>
-        <h2>CurrTodoView.jsx</h2>
+        <h2>{ listName || 'Loading Name...'}</h2>
+        <h5>{ new Date(listDate).toString().split(' ').slice(0, 4)
+            .join(' ') || 'Loading Date...'}</h5>
         <TDList list={todoItems || []} rmFunc={this.handleRemove} compFunc={this.handleComplete} />
         <TDinput add={this.handleAddToDo} />
         <OptBtn />
-        {/* {console.log(todoItems)} */}
-        {/* {this.handleAddToDo(1111, "test handleAddToDo", 3, 22222)} */}
       </div>
     );
   }
