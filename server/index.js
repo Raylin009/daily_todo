@@ -26,7 +26,7 @@ app.get('/lists/all', (req, res) => pg.getAllList(req, res, db));
 app.get('/l/:id', (req, res) => pg.getItemsByListId(req, res, db));
 
 // get today's list if exist aka initDailyList
-app.get('/init/list', (req, res) => pg.getItemsByListId(req, res, db));
+app.post('/initList', (req, res) => pg.initDailyList(req, res, db));
 
 // add list
 

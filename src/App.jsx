@@ -2,6 +2,7 @@
 /* eslint-disable import/extensions */
 import React from 'react';
 import Axios from 'axios';
+import Moment from 'moment';
 import CurrTodoView from './components/CurrTodoView.jsx';
 import PastTodos from './components/PastTodos.jsx';
 
@@ -14,43 +15,66 @@ class App extends React.Component {
       heroTodoListItems: [],
     };
 
+    this.initList = this.initList.bind(this);
     this.getLists = this.getLists.bind(this);
     this.getItems = this.getItems.bind(this);
     this.handleListSelection = this.handleListSelection.bind(this);
   }
 
   componentDidMount() {
-    this.getLists();
+    this.initList();
+    // this.getLists();
   }
 
+  
   getLists() {
     Axios.get('/lists/all')
-      .then(({ data }) => {
-        if (data.length) {
-          this.setState({
-            lists: data,
-            heroListID: data[0].id,
-            heroListName: data[0].name,
-            heroListDate: data[0].date,
-            heroTodoListItems: [],
-          });
-        }
-        return data[0].id;
-      })
-      .then(id => this.getItems(id))
-      .catch(err => console.log(`getLists failed ${err}`));
+    .then(({ data }) => {
+      if (data.length) {
+        this.setState({
+          lists: data,
+          heroListID: data[0].id,
+          heroListName: data[0].name,
+          heroListDate: data[0].date,
+          heroTodoListItems: [],
+        });
+      }
+      return data[0].id;
+    })
+    .then(id => this.getItems(id))
+    .catch(err => console.log(`getLists failed ${err}`));
   }
-
+  
   getItems(id) {
     if (id !== null) {
       Axios.get(`/l/${id}`)
-        .then(({ data }) => {
-          this.setState({
-            heroTodoListItems: data,
-          });
-        })
-        .catch(err => console.log(`getItems failed: ${err}`));
+      .then(({ data }) => {
+        this.setState({
+          heroTodoListItems: data,
+        });
+      })
+      .catch(err => console.log(`getItems failed: ${err}`));
     }
+  }
+
+  initList() {
+    // axios.get if today's list exist
+      // if true, everything operate as it is right now
+      // ie getList()
+    // else
+      // create a new list for today
+
+    // const getDateString = date => (date.toString().split(' ').slice(0, 4).join(' '))
+    const getDateString = (string) => (string.slice(0,string.indexOf('T')));
+    let today = Moment().format();
+    let tomorrow = Moment().add(1, 'days').format();
+    
+    today = getDateString(today);
+    tomorrow = getDateString(tomorrow);
+
+    Axios.post('./initList', { today, tomorrow })
+      .then(() => this.getLists())
+      .catch(console.log);
   }
 
   handleListSelection(listID, listName, listDate) {
