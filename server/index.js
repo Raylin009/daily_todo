@@ -25,21 +25,15 @@ app.get('/lists/all', (req, res) => pg.getAllList(req, res, db));
 // get list by id
 app.get('/l/:id', (req, res) => pg.getItemsByListId(req, res, db));
 
-// get today's list if exist aka initDailyList
+// initciate daily list if not exists
 app.post('/initList', (req, res) => pg.initDailyList(req, res, db));
-
-// add list
-
-// delete List
-
-// ---> change list name
-
-// get items by list id
 
 // Add item
 app.post('/addtask', (req, res) => pg.addItemToList(req, res, db));
+
 // toggle complete
 app.patch('/complete/:id', (req, res) => pg.toggleComplete(req, res, db));
+
 // delete item
 app.delete('/rm/:id', (req, res) => pg.deleteTodoItem(req, res, db));
 

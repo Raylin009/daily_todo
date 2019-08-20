@@ -23,52 +23,43 @@ class App extends React.Component {
 
   componentDidMount() {
     this.initList();
-    // this.getLists();
   }
 
-  
   getLists() {
     Axios.get('/lists/all')
-    .then(({ data }) => {
-      if (data.length) {
-        this.setState({
-          lists: data,
-          heroListID: data[0].id,
-          heroListName: data[0].name,
-          heroListDate: data[0].date,
-          heroTodoListItems: [],
-        });
-      }
-      return data[0].id;
-    })
-    .then(id => this.getItems(id))
-    .catch(err => console.log(`getLists failed ${err}`));
+      .then(({ data }) => {
+        if (data.length) {
+          this.setState({
+            lists: data,
+            heroListID: data[0].id,
+            heroListName: data[0].name,
+            heroListDate: data[0].date,
+            heroTodoListItems: [],
+          });
+        }
+        return data[0].id;
+      })
+      .then(id => this.getItems(id))
+      .catch(err => console.log(`getLists failed ${err}`));
   }
-  
+
   getItems(id) {
     if (id !== null) {
       Axios.get(`/l/${id}`)
-      .then(({ data }) => {
-        this.setState({
-          heroTodoListItems: data,
-        });
-      })
-      .catch(err => console.log(`getItems failed: ${err}`));
+        .then(({ data }) => {
+          this.setState({
+            heroTodoListItems: data,
+          });
+        })
+        .catch(err => console.log(`getItems failed: ${err}`));
     }
   }
 
   initList() {
-    // axios.get if today's list exist
-      // if true, everything operate as it is right now
-      // ie getList()
-    // else
-      // create a new list for today
-
-    // const getDateString = date => (date.toString().split(' ').slice(0, 4).join(' '))
-    const getDateString = (string) => (string.slice(0,string.indexOf('T')));
+    const getDateString = string => (string.slice(0, string.indexOf('T')));
     let today = Moment().format();
     let tomorrow = Moment().add(1, 'days').format();
-    
+
     today = getDateString(today);
     tomorrow = getDateString(tomorrow);
 
@@ -86,7 +77,13 @@ class App extends React.Component {
   }
 
   render() {
-    const { lists, heroTodoListItems, heroListID, heroListName, heroListDate } = this.state;
+    const {
+      lists,
+      heroTodoListItems,
+      heroListID,
+      heroListName,
+      heroListDate,
+    } = this.state;
     return (
       <div style={{ border: 'solid', margin: '5px', display: 'flex', alignContent: 'stretch', height: '1000px'}}>
         <CurrTodoView

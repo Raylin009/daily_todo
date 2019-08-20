@@ -2,14 +2,10 @@ import React from 'react';
 import Axios from 'axios';
 import TDList from './TDList.jsx';
 import TDinput from './TDinput.jsx';
-import OptBtn from './OptBtn.jsx';
 
 class currTodoView extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      list: [],
-    };
 
     this.handleAddToDo = this.handleAddToDo.bind(this);
     this.handleRemove = this.handleRemove.bind(this);
@@ -47,11 +43,9 @@ class currTodoView extends React.Component {
     return (
       <div style={{ border: 'solid', margin: '5px', order: 2, flexGrow: 9 }}>
         <h2>{ listName || 'Loading Name...'}</h2>
-        <h5>{ new Date(listDate).toString().split(' ').slice(0, 4)
-            .join(' ') || 'Loading Date...'}</h5>
+        <h5>{new Date(listDate).toString().split(' ').slice(0, 4).join(' ') || 'Loading Date...'}</h5>
         <TDList list={todoItems || []} rmFunc={this.handleRemove} compFunc={this.handleComplete} />
         <TDinput add={this.handleAddToDo} />
-        <OptBtn />
       </div>
     );
   }

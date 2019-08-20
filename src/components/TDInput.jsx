@@ -21,7 +21,7 @@ class TDinput extends React.Component {
     });
   }
 
-  handleSubmit(e) {
+  handleSubmit() {
     const { add } = this.props;
     const { description } = this.state;
 

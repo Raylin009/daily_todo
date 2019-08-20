@@ -1,15 +1,5 @@
 import React from 'react';
 
-// const PTDItem = ({ id, name }) => (
-//   <div
-//     key={id}
-//     style={{ border: 'solid', margin: '5px' }}
-//   >
-//     <h3>{name}</h3>
-//     <div hidden={false}>X</div>
-//   </div>
-// );
-
 class PTDItem extends React.Component {
   constructor(props) {
     super(props);
@@ -39,9 +29,7 @@ class PTDItem extends React.Component {
         style={{ border: 'solid', margin: '5px' }}
       >
         <h3>{ name }</h3>
-        <div 
-          hidden={hideDelete}
-        >X</div>
+        <div hidden={hideDelete}>X</div>
       </div>
     );
   }
