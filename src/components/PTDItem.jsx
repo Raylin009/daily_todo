@@ -33,7 +33,6 @@ class PTDItem extends React.Component {
       </div>
     );
   }
-
 }
 
 export default PTDItem;
