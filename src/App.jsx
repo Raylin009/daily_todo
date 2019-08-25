@@ -5,6 +5,7 @@ import Axios from 'axios';
 import Moment from 'moment';
 import CurrTodoView from './components/CurrTodoView.jsx';
 import PastTodos from './components/PastTodos.jsx';
+// import 'typeface-roboto';
 
 class App extends React.Component {
   constructor(props) {
