@@ -84,6 +84,7 @@ class App extends React.Component {
       heroListName,
       heroListDate,
     } = this.state;
+
     return (
       <div style={{ border: 'solid', margin: '5px', display: 'flex', alignContent: 'stretch', height: '1000px'}}>
         <CurrTodoView

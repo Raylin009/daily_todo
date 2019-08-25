@@ -1,38 +1,22 @@
-import React from 'react';
+import React, { useState } from 'react';
 
-class PTDItem extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      hideDelete: true,
-    };
-    this.toggleDelete = this.toggleDelete.bind(this);
-  }
+const PTDItem = ({ date, id, name, listSelection }) => {
+  const [visiility, showAndHide] = useState(true);
 
-  toggleDelete() {
-    const { hideDelete } = this.state;
-    this.setState({
-      hideDelete: !hideDelete,
-    });
-  }
-
-  render() {
-    const { id, name, date } = this.props;
-    const { hideDelete } = this.state;
-
-    return (
-      <div
-        onMouseEnter={this.toggleDelete}
-        onMouseLeave={this.toggleDelete}
-        onClick={() => (this.props.listSelection( id, name, date ))}
-        key={id}
-        style={{ border: 'solid', margin: '5px' }}
-      >
-        <h3>{ name }</h3>
-        <div hidden={hideDelete}>X</div>
-      </div>
-    );
-  }
-}
+  return (
+    <div
+      onMouseEnter={()=>showAndHide(!visiility)}
+      onMouseLeave={()=>showAndHide(!visiility)}
+      onClick={() => (listSelection( id, name, date ))}
+      key={id}
+      style={{ border: 'solid', margin: '5px' }}
+    >
+      <h1>
+        { name }
+      </h1>
+      <div hidden={visiility}>X</div>
+    </div>
+  );
+};
 
 export default PTDItem;

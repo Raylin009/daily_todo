@@ -46,7 +46,7 @@ const toggleComplete = (req, res, db) => {
 
 const initDailyList = (req, res, db) => {
   const { today, tomorrow } = req.body;
-  console.table({ today, tomorrow })
+  // console.table({ today, tomorrow })
   // console.log(req.body)
   db.raw(`INSERT INTO lists (name, date) SELECT '${today}', '${today}' WHERE NOT EXISTS (SELECT * FROM lists WHERE date BETWEEN '${today}' AND '${tomorrow}');`)
     .then(data => res.send(data))
