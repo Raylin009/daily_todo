@@ -40,11 +40,10 @@ class TDinput extends React.Component {
     const { description } = this.state;
 
     return (
-      <div style={{ border: 'solid', margin: '5px' }}>
-        <h3>TDinput.jsx</h3>
+      <div>
         <form>
           <input name="addToDo" type="text" value={description} onChange={this.handleChange} />
-          <button onClick={this.handleSubmit}></button>
+          <button onClick={this.handleSubmit}>Submit</button>
         </form>
       </div>
     );

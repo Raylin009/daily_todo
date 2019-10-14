@@ -36,7 +36,7 @@ class TDitem extends React.Component {
     const { item } = this.props;
 
     return (
-      <div style={{ marginBlockEnd: '5px', marginRight: 'inherit', borderBottom: 'solid', display: 'flex', flexDirection: 'row', height: 24 }}>
+      <div style={{ marginBlockEnd: '5px', display: 'flex', flexDirection: 'row', height: 24 }}>
         <div id={item.id} onClick={this.toggleComplete} style={ renderCompStatus(item.complete) } ></div>
         <div style={{ margin: '5px' }}>
           { item.description }
