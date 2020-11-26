@@ -14,6 +14,19 @@ module.exports = {
         use: {
           loader: "babel-loader"
         }
+      },
+      {
+        test: /\.css$/,
+        include: `${__dirname}/src`,
+        use: [
+          { loader: 'style-loader'},
+          { loader: 'css-loader',
+            options: {
+              modules:{localIdentName: '[name]_[local]'},
+              localsConvention: 'asIs',
+            },
+          }
+        ]
       }
     ]
   },

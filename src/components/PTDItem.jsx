@@ -5,7 +5,6 @@ import Btn from '@material-ui/core/Button';
 import Moment from 'moment';
 // import CardActions from '@material-ui/core/CardActions';
 import { makeStyles } from '@material-ui/core/styles';
-// import Moment = require('moment');
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -32,10 +31,10 @@ const PTDItem = ({ date, id, name, listSelection }) => {
         fullWidth={true}
         onClick={() => (listSelection(id, name, date))}
       >
-        <Typography variant='h4' gutterBottom>
+        <Typography gutterBottom>
           {week}
         </Typography>
-        <Typography variant='h6' gutterBottom>
+        <Typography gutterBottom>
           {dateMonth}
         </Typography>
         {/* {console.log(dateName)} */}

@@ -42,8 +42,8 @@ class currTodoView extends React.Component {
     const { todoItems, listName, listDate } = this.props;
     return (
       <div style={{ margin: '5px', order: 2, flexGrow: 9 }}>
-        <h2>{ listName || 'Loading Name...'}</h2>
-        <h5>{new Date(listDate).toString().split(' ').slice(0, 4).join(' ') || 'Loading Date...'}</h5>
+        {/* <h2>{ listName || 'Loading Name...'}</h2>
+        <h5>{new Date(listDate).toString().split(' ').slice(0, 4).join(' ') || 'Loading Date...'}</h5> */}
         <TDList list={todoItems || []} rmFunc={this.handleRemove} compFunc={this.handleComplete} />
         <TDinput add={this.handleAddToDo} />
       </div>
